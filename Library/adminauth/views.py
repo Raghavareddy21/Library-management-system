@@ -4,31 +4,14 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from . import forms
 from . import models
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 # Create your views here
 
-def signup(request):
-    if request.user.is_authenticated:
-        return HttpResponse("you are already logged in")
-    else:
-        if request.method == 'POST':
-            form = forms.Register(request.POST)
-            if form.is_valid():
-                form.save()
-                models.Otherdetail(
-                user=User.objects.get(username=form.cleaned_data.get('username')),
-                bio=form.cleaned_data.get('bio'),
-                dob=form.cleaned_data.get('date_of_birth')
-                ).save()
-                return HttpResponse("user saved")
-            else:
-                return render(request, 'userauth/signup.html', {'form': form})
-        else:
-            form = forms.Register()
-        return render(request, 'userauth/signup.html', {'form': form})
+
 
 def login_user(request):
     if request.user.is_authenticated:
@@ -43,14 +26,15 @@ def login_user(request):
                 if user.is_active:
                     login(request, user)
                     # Redirect to music list page.
-                    return redirect('/libuser/list/')
+                    return HttpResponseRedirect('/libadmin/Home/')
                 else:
-                    return render(request, 'userauth/login.html', {'err': 'Your account is banned'})
+                    return render(request, 'adminauth/login.html', {'err': 'Your account is banned'})
             else:
-                return render(request, 'userauth/login.html', {'err': 'Wrong credentials provided'})
+                return render(request, 'adminauth/login.html', {'err': 'Wrong credentials provided'})
         else:
-            return render(request, 'userauth/login.html', {'err': ''})
-
+            return render(request, 'adminauth/login.html', {'err': ''})
+def home(request):
+    return render(request, 'adminauth/home.html')
 #this setting file is a sample one need to edit tomorrow
 # def setting(request):
 #     if request.user.is_authenticated():

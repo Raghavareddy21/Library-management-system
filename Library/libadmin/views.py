@@ -3,20 +3,7 @@ from django.views import generic
 from . import models
 from django.http import HttpResponse
 from . import forms
-# Create your views here.
-def books(request):
-	if request.user.is_authenticated:
-		books = models.booklist.objects.all()
-		return render(request, 'libadmin/Home.html', {'booklist': books})
-	else:
-		return HttpResponse("You need to login to access books")
 
-def booklist(request,pk):
-	if request.user.is_authenticated:
-		books =models.booklist.objects.get(pk=pk)
-		return render(request,'libadmin/list.html',{'library':books})
-	else:
-		return HttpResponse("You need to login to access the books")
 def add_books(request):
 	if request.user.is_authenticated:
 		if request.method=='POST':
@@ -26,6 +13,30 @@ def add_books(request):
 				return HttpResponse("Book added")
 		else:
 			form=forms.BookaddForm()
-		return render(request,'',{'form':form})
+			return render(request,'addbook.html',{'form':form})
 	else:
 		return HttpResponse("You need to login to access the books")
+def add_category(request):
+	if request.user.is_authenticated:
+		if request.method=='POST':
+			form =forms.add_category(request.POST,request.FILES)
+			if form.is_valid():
+				form.save()
+				return HttpResponse("Category added")
+		else:
+			form=forms.add_category()
+			return render(request,'addcategory.html',{'form':form})
+	else:
+		return HttpResponse("you need to login to access the categories")
+def categorylist(request):
+	if request.user.is_authenticated:
+		categories = models.category.objects.all()
+		return render(request, 'libadmin/Home.html',{'category_list':categories})
+	else:
+		return HttpResponse("you need to login to access categories")
+def booklist(request,pk):
+	if request.user.is_authenticated:
+		book=models.category.objects.get(pk=pk)
+		return render(request, 'libadmin/booklist.html')
+	else:
+		return HttpResponse("you need to login to access books")

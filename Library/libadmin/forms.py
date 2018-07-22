@@ -4,5 +4,9 @@ from libadmin.models import models
 from . import models
 class BookaddForm(forms.ModelForm):
 	class Meta:
-		model = models.booklist
-		fields =('Title','Author','Category','image')
+		model = models.books
+		fields =('book_category','Title','Author','image')
+class add_category(forms.ModelForm):
+	class Meta:
+		model = models.category
+		fields=('name','about','img','upload_date')

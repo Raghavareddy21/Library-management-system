@@ -1,0 +1,14 @@
+{% extends 'libadmin/nav.html' %}
+{% block content %}
+<div class="container">
+	<h1>Add Category:</h1>
+<div class="row" style="margin: 25px;">
+	<form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">Add Category</button>
+	</form>
+</div>
+</div>
+
+{% endblock %}
