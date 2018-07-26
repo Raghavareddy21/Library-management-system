@@ -13,7 +13,7 @@ def add_books(request):
 				return HttpResponse("Book added")
 		else:
 			form=forms.BookaddForm()
-			return render(request,'addbook.html',{'form':form})
+			return render(request,'libadmin/addbook.html',{'form':form})
 	else:
 		return HttpResponse("You need to login to access the books")
 def add_category(request):
@@ -25,7 +25,7 @@ def add_category(request):
 				return HttpResponse("Category added")
 		else:
 			form=forms.add_category()
-			return render(request,'addcategory.html',{'form':form})
+			return render(request,'libadmin/addcategory.html',{'form':form})
 	else:
 		return HttpResponse("you need to login to access the categories")
 def categorylist(request):
@@ -37,6 +37,6 @@ def categorylist(request):
 def booklist(request,pk):
 	if request.user.is_authenticated:
 		book=models.category.objects.get(pk=pk)
-		return render(request, 'libadmin/booklist.html')
+		return render(request, 'libadmin/booklist.html',{'categories':book})
 	else:
 		return HttpResponse("you need to login to access books")

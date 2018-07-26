@@ -26,11 +26,13 @@ SECRET_KEY = 'xzuayv$#naw#-+etcv!w2dts!3p%edv!an#-7ydm39reeadtl-'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_view_permission',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,9 @@ INSTALLED_APPS = [
     'libadmin',
     'userauth',
     'adminauth',
+    'crispy_forms',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -57,6 +62,7 @@ ROOT_URLCONF = 'Library.urls'
 
 TEMPLATES = [
     {
+
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
@@ -66,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },

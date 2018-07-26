@@ -17,6 +17,7 @@ def signup(request):
         if request.method == 'POST':
             form = forms.Register(request.POST)
             if form.is_valid():
+                User.is_staff=False
                 form.save()
                 models.Otherdetail(
                 user=User.objects.get(username=form.cleaned_data.get('username')),
@@ -39,29 +40,17 @@ def login_user(request):
             password = request.POST['password']
             user = authenticate(username=username,
              password=password)
+            m = User.objects.get(username=request.POST['username'])
             if user is not None:
                 if user.is_active:
+                    request.session['User_id'] = m.id
                     login(request, user)
-                    # Redirect to music list page.
-                    return redirect('/libuser/list/')
+                    return redirect('/libuser/Home/')
                 else:
                     return render(request, 'userauth/login.html', {'err': 'Your account is banned'})
             else:
                 return render(request, 'userauth/login.html', {'err': 'Wrong credentials provided'})
         else:
             return render(request, 'userauth/login.html', {'err': ''})
-
-#this setting file is a sample one need to edit tomorrow
-# def setting(request):
-#     if request.user.is_authenticated():
-#         if request.method == 'POST':
-#              form = DocumentForm(request.POST, request.FILES)
-#              if form.is_valid():
-#                  form.save()
-#         else:
-#             form = DocumentForm()
-#              return render(request, 'core/model_form_upload.html', {
-#         'form': form
-#     })
-#     else:
-#         return HttpResponse("you are already logged in")
+def home(request):
+    return render(request, 'userauth/home.html')

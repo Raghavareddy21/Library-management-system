@@ -25,7 +25,6 @@ def login_user(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    # Redirect to music list page.
                     return HttpResponseRedirect('/libadmin/Home/')
                 else:
                     return render(request, 'adminauth/login.html', {'err': 'Your account is banned'})
