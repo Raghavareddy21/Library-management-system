@@ -3,6 +3,7 @@ from django.views import generic
 from libadmin.models import category
 from libadmin.models import books
 from libadmin import models
+from . import forms
 from django.http import HttpResponse
 
 
@@ -18,5 +19,17 @@ def booklist(request,pk):
 		return render(request, 'libuser/booklist.html',{'categories':book})
 	else:
 		return HttpResponse("you need to login to access books")
-
-# Create your views here.
+def placerequest(request):
+	if request.user.is_authenticated:
+		if request.method == 'POST':
+			form = forms.placerequest(request.POST)
+			if form.is_valid():
+				form.save()
+				return HttpResponse("Your request has been placed")
+			else:
+				return render(request, 'libuser/placerequest.html', {'form': form})
+		else:
+			form = forms.placerequest()
+			return render(request, 'libuser/placerequest.html', {'form': form})
+	else:
+		return HttpResponse("You must login to place request")

@@ -6,7 +6,7 @@
 	{% for category in category_list %}
 	<div class="col-md-4" ng-controller="ContentCtrl" ng-app="first_module">
 	<div class="card" style="width:350px;margin:10px;" >
-	<img class="card-img-top" src="{{ category.image.url }}/" alt="{{category.name}} image" style="width:100%;height:300px;">
+	<img class="card-img-top" src="{{ category.img.url }}/" alt="{{category.name}} image" style="width:100%;height:300px;">
 	<div class="card-body">
       <h4 class="card-title">{{category.name}}</h4>
       <a href="/libadmin/{{category.id}}/" class="btn btn-primary">Books</a>

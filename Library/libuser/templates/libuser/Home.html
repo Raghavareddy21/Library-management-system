@@ -1,5 +1,19 @@
-{% extends 'adminauth/nav.html' %}
-
+{% extends 'libuser/nav.html' %}
 {% block content %}
-
-{% endblock %}
+<div class="container">
+	<h1><center>Welcome To Your User Account {{user.username}}</center></h1>
+	<h3>Here are the categories:</h3>
+	{% for category in category_list %}
+	<div class="col-md-4" ng-controller="ContentCtrl" ng-app="first_module">
+	<div class="card" style="width:350px;margin:10px;" >
+	<img class="card-img-top" src="{{ category.img.url }}/" alt="{{category.name}} image" style="width:100%;height:300px;">
+	<div class="card-body">
+      <h4 class="card-title">{{category.name}}</h4>
+      <a href="/libuser/{{category.id}}/" class="btn btn-primary">Books</a>
+    </div>
+    </content-item>
+	</div>
+	</div>
+	{% endfor %}
+ </div>
+	{% endblock %}

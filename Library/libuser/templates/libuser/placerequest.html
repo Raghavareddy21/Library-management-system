@@ -1,0 +1,26 @@
+{% extends 'userauth/nav.html' %}
+
+{% block content %}
+<div class="container">
+    <br /><br /><br />
+  <div class="row">
+    <div class="col-md-6 offset-md-4 card">
+      <div class="card-header" style="background: #ffffff;"></span><h1>Place The Request to Issue a Book:</h1></div>
+      <div class="card-body">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+    {% for field in form %}
+        <label class="control-label"> {{ field.label_tag }} </label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        {{ field }}<br>
+    {% endfor %}
+  </div>
+  <div class="form-group">
+  <button type="submit" class="btn btn-primary btn-md" id="login">Issue</button>
+  </div>
+  </form>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
