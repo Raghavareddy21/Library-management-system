@@ -3,8 +3,10 @@ from django.views import generic
 from libadmin.models import category
 from libadmin.models import books
 from libadmin import models
+from . import models as model
 from . import forms
 from django.http import HttpResponse
+from django.utils import timezone
 
 
 def categorylist(request):
@@ -23,6 +25,7 @@ def placerequest(request):
 	if request.user.is_authenticated:
 		if request.method == 'POST':
 			form = forms.placerequest(request.POST)
+			today=timezone.now()
 			if form.is_valid():
 				form.save()
 				return HttpResponse("Your request has been placed")

@@ -1,0 +1,44 @@
+{% extends 'libuser/nav.html' %}
+{% block content %}
+<div class="container">
+  <br>
+<h2>{{categories.name}} Book List:</h2>
+<div class="row">
+<div class="col-md-12">
+<div class="card" style="margin:10px;">
+    <img class="card-img-top" src="{{ categories.img.url }}" alt="{{categories.name}} image" style="width:500px;">
+    <div class="card-body">
+      <h4 class="card-title">Book list</h4>
+      <p class="card-text"><b>Name:</b> {{ categories.name }}</p>
+      <p class="card-text"><b>About:</b> {{ categories.about }}</p>
+      <p class="card-text"><b>date of upload:</b> {{ categories.upload_date }}</p>
+        <h4 class="card-title">Books:</h4>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Books name</th>
+                <th>Author</th>
+                <th>Image</th>
+                <th>Read</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for book in categories.books_set.all %}
+            <tr>
+              <td> {{book.Title}} </td>
+              <td> {{book.Author}} </td>
+               <td><img class="card-img-top" src="{{ book.image.url }}" alt="{{book.name}} image" style="width:100px;"></td>
+              <td> <a href="{{book.book.url}}" download>
+                    Download
+                  </a>
+                 </td>
+           </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+{% endblock %}
