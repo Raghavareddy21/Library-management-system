@@ -22,6 +22,7 @@ class books(models.Model):
 	book=models.FileField(upload_to='files/')
 	date=models.DateField()
 	upload_date=models.DateTimeField(default=timezone.now())
+	status=models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.Title

@@ -6,7 +6,7 @@ from . import models
 class BookaddForm(forms.ModelForm):
 	class Meta:
 		model = models.books
-		fields =('book_category','Title','Author','image','book','date','upload_date')
+		fields =('book_category','Title','Author','image','book','date','upload_date','status')
 
 class add_category(forms.ModelForm):
 	class Meta:
@@ -17,5 +17,9 @@ class add_category(forms.ModelForm):
 class notification(forms.ModelForm):
 	class Meta:
 		model=model.placerequest
-		fields=('accept',)
+		fields=('accept', )
+class booknotify(forms.ModelForm):
+	class Meta:
+		model=models.books
+		fields=('status', )
 		

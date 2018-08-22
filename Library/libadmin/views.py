@@ -56,12 +56,15 @@ def notification(request):
 		if request.method=='POST':
 			book=model.placerequest.objects.filter(accept=True)
 			form =forms.notification(request.POST)
-			if form.is_valid():
-			 	form.save()
+			formss=forms.booknotify(request.POST)
+			if form.is_valid() and formss.is_valid():
+			 	form.save() and formss.save()
 			 	return HttpResponse("the request has been accepted")
 		else:
 			form=forms.notification(request.POST,request.FILES)
 			book=model.placerequest.objects.filter(accept=False)
-			return render(request,'libadmin/notification.html',{'categories':book,'form':form})
+			newbook=models.books.objects.filter(status=False)
+			formss=forms.booknotify(request.POST,request.FILES)
+			return render(request,'libadmin/notification.html',{'categories':book,'form':form,'categorie':newbook,'forms':formss})
 	else:
 		return HttpResponse("you need to login to accept the request")

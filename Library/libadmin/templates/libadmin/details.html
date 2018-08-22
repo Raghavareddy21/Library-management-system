@@ -24,6 +24,7 @@
             </thead>
             <tbody>
             {% for book in categories.books_set.all %}
+            {% if book.status%}
             <tr>
               <td> {{book.Title}} </td>
               <td> {{book.Author}} </td>
@@ -33,6 +34,7 @@
                   </a>
                  </td>
            </tr>
+           {% endif %}
             {% endfor %}
           </tbody>
         </table>

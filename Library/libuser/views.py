@@ -36,3 +36,15 @@ def placerequest(request):
 			return render(request, 'libuser/placerequest.html', {'form': form})
 	else:
 		return HttpResponse("You must login to place request")
+def add_books(request):
+	if request.user.is_authenticated:
+		if request.method=='POST':
+			form = forms.BookaddForm(request.POST,request.FILES)
+			if form.is_valid():
+				form.save()
+				return HttpResponse("Book added")
+		else:
+			form=forms.BookaddForm()
+			return render(request,'libuser/addbook.html',{'form':form})
+	else:
+		return HttpResponse("You need to login to access the books")

@@ -27,5 +27,31 @@
 </form>
 </div>
 </div>
+</br>
+</br>
+<h3>The Requests Placed for Adding New Books:</h3>
+  <div class="card" style="margin:10px;">
+    <div class="col-md-6 offset-md-4 card">
+    <form method="post">
+     {% for newbook in categorie %}
+   
+<ul>
+<li>{{newbook}}</li>
+<li>
+
+    {% csrf_token %}
+    {% for field in forms %}
+        <label class="control-label" id="{{newbook.pk}}">{{ field.label_tag }} </label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        {{ field }}<br>
+    {% endfor %}
+</li>
+</ul>
+{% endfor %}
+<div class="form-group">
+  <button type="submit" class="btn btn-primary btn-md" id="login">Add Books</button>
+  </div>
+</form>
+</div>
+</div>
 </div>
 {% endblock %}
